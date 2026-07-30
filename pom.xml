@@ -30,6 +30,7 @@
         <!-- Used to override the release bytecode for compiling tests. This allows testing on newer bytecode. -->
         <test.maven.compiler.release>${maven.compiler.release}</test.maven.compiler.release>
         <!-- versions -->
+        <version.org.apache.maven.plugins.maven-shade-plugin>3.6.2</version.org.apache.maven.plugins.maven-shade-plugin>
         <version.info.picocli>4.7.5</version.info.picocli>
         <version.org.ow2.asm>9.8</version.org.ow2.asm>
         <version.biz.aQute.bnd>6.4.0</version.biz.aQute.bnd>
@@ -107,7 +108,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
                     <version>${version.org.apache.maven.plugin-plugin}</version>
-                </plugin>    
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${version.org.apache.maven.plugins.maven-shade-plugin}</version>
+                </plugin>
                 <plugin>
                     <groupId>com.atlassian.plugin</groupId>
                     <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
