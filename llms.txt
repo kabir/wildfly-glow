@@ -1,0 +1,38 @@
+# WildFly Glow
+
+> WildFly Glow is a provisioning analysis engine that scans application deployments (WAR, JAR, EAR) to automatically determine the minimal set of Galleon feature packs and layers required to run the application on WildFly. It provides a CLI, a core library, integration with the WildFly Maven Plugin and Arquillian, and can provision trimmed WildFly servers for bare-metal, Docker, and OpenShift environments. This index covers the module structure, documentation, and key source entry points.
+
+## Documentation
+
+- [User Guide](./docs/guide/index.adoc): Top-level documentation covering introduction, CLI usage, Maven plugin integration, Arquillian plugin, server versions, and JBang support
+- [Introduction & Concepts](./docs/guide/intro/index.adoc): How Glow works — layer discovery rules, feature-pack knowledge base, add-ons, execution contexts (bare-metal vs cloud), HA profiles, stability levels, and OpenShift deployment
+- [CLI Usage](./docs/guide/cli/index.adoc): Command-line tool setup, Maven configuration, and scanning commands
+- [WildFly Maven Plugin Integration](./docs/guide/wildfly-maven-plugin/index.adoc): Using `<discover-provisioning-info/>` in the WildFly Maven Plugin to auto-discover feature packs and layers — covers version selection, add-ons, cloud context, HA profiles, dry-run, error handling, server variants, and verbose output
+- [Arquillian Maven Plugin](./docs/guide/test-maven-plugin/index.adoc): Scanning Arquillian test deployments to generate `provisioning.xml` — expected-discovery validation, add-ons, error handling, surefire execution selection, and aggregation
+- [JBang Integration](./docs/guide/jbang/index.adoc): Running single Java files in WildFly using JBang with Glow-based provisioning, including MicroProfile and AI examples
+
+## Core Modules
+
+- [core/](./core/): Scanning engine — `GlowSession` orchestrates deployment scanning, `ScanArguments` configures scan parameters, `ScanResults` holds discovered layers/feature-packs, `LayerMapping`/`LayerMetadata` define the rule matching system, `ProvisioningUtils` handles Galleon provisioning, and `DockerSupport` generates container images
+- [cli/](./cli/): Picocli-based command-line interface — `ScanCommand` for deployment scanning, `ShowAddOnsCommand`, `ShowServerVersionsCommand`, `ShowConfigurationCommand`, `GoOfflineCommand`, and `GlowCLI` entry point
+- [cli-support/](./cli-support/): Shared CLI infrastructure — `AbstractCommand` base class, `CLIConfigurationResolver`, constants, and completion support
+
+## Build & Test Tooling Modules
+
+- [arquillian-plugin/](./arquillian-plugin/): Maven plugin (`ScanMojo`) that scans Arquillian `@Deployment` methods to generate `provisioning.xml` for test server provisioning
+- [arquillian-plugin-scanner/](./arquillian-plugin-scanner/): Deployment scanner support for the Arquillian plugin
+- [doc-plugin/](./doc-plugin/): Maven plugin for generating Glow documentation — `GenerateMojo` and `ScanDocMojo`
+- [maven-resolver/](./maven-resolver/): Maven artifact resolution — `MavenResolver` and `MavenSettings` for resolving Galleon feature packs from Maven repositories
+
+## Deployment & Operations Modules
+
+- [openshift-deployment/](./openshift-deployment/): OpenShift deployment support with automatic service deployers for PostgreSQL, MySQL, MariaDB, AMQ Broker, and Keycloak — `OpenShiftSupport` API and per-service deployer implementations
+- [dist/](./dist/): Distribution packaging for the CLI zip artifact
+
+## Project Files
+
+- [README.md](./README.md): Project overview, build instructions, and CLI quickstart
+- [pom.xml](./pom.xml): Parent POM — module list, dependency versions, build configuration
+- [examples/](./examples/): Sample WAR files (kitchensink.war, todo-backend.war) for testing scanning
+- [tests/](./tests/): Integration tests — CLI tests, core scanning tests, Arquillian plugin tests, and layer metadata rule tests
+- [resources/](./resources/): WildFly channel configuration, task properties, and artifact version mappings
