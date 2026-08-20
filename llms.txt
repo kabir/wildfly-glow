@@ -6,6 +6,7 @@
 
 - [User Guide](./docs/guide/index.adoc): Top-level documentation covering introduction, CLI usage, Maven plugin integration, Arquillian plugin, server versions, and JBang support
 - [Introduction & Concepts](./docs/guide/intro/index.adoc): How Glow works — layer discovery rules, feature-pack knowledge base, add-ons, execution contexts (bare-metal vs cloud), HA profiles, stability levels, and OpenShift deployment
+- [Rule Engine Deep Dive](./.agents/deep-dives/rule-engine.md): How the discovery rule engine works — pipeline stages (buildMapping → DeploymentScanner → GlowSession.scan), all `org.wildfly.rule.*` property types with examples, add-on system mechanics, conditional rules (hidden-if/no-configuration-if), and how to add rules for a new subsystem
 - [CLI Usage](./docs/guide/cli/index.adoc): Command-line tool setup, Maven configuration, and scanning commands
 - [WildFly Maven Plugin Integration](./docs/guide/wildfly-maven-plugin/index.adoc): Using `<discover-provisioning-info/>` in the WildFly Maven Plugin to auto-discover feature packs and layers — covers version selection, add-ons, cloud context, HA profiles, dry-run, error handling, server variants, and verbose output
 - [Arquillian Maven Plugin](./docs/guide/test-maven-plugin/index.adoc): Scanning Arquillian test deployments to generate `provisioning.xml` — expected-discovery validation, add-ons, error handling, surefire execution selection, and aggregation
